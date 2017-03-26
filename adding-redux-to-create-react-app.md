@@ -2,18 +2,25 @@
 
 ## Setup
 
-By now, you should have `create-react-app` installed on your computer via `npm`. If not, run:
+By now, you should have `create-react-app` installed on your computer via `npm`.
+<details>
+<summary>
+If you have not, click here.
+</summary>
+
+Run the following:
 
 ```bash
  $ npm i -g create-react-app
 ```
+</details>
 
 ```bash
  $ create-react-app shopping-cart
  $ npm i -S redux react-redux
 ```
 
-After we've installed this dependencies, let's create directories for `actions`, `components`, and `reducers` in the `src` directory.
+After we've installed these dependencies, let's create directories for `actions`, `components`, and `reducers` in the `src` directory.
 
 ```bash
  $ mkdir src/actions src/components src/reducers
@@ -21,7 +28,7 @@ After we've installed this dependencies, let's create directories for `actions`,
 
 ## Adding a Store
 
-Next we'll create a `store.js`
+Next we'll create a file that defines our store, titled `store.js`
 
 ```bash
  $ touch src/store.js
