@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
-import { cnonect } from 'react-redux'
+import { connect } from 'react-redux'
+
 import * as CartActions from '../actions/cart'
 import Shelf from '../containers/shelf'
 
