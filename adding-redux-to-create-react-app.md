@@ -203,7 +203,7 @@ class Cart extends Component {
 // More information about the implementation pattern below can be found at the link below
 // https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
 
-//Subscribes
+//Subscribes the container component to any changes in Redux-managed state
 function mapStateToProps(state, prop){
   return {
     cart: state.cart
@@ -217,3 +217,19 @@ function mapDispatchtoProps(dispatch) {
 
 export default connect(mapStateToProps, mapDispatchtoProps)(Cart)
 ```
+
+## Adding in Integration with Chrome Redux Devtools Extension
+
+> in `src/store.js`:
+
+```js
+export default(initialState) => {
+    return createStore(
+      rootReducer,
+      initialState,
+      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    )
+}
+```
+
+Now you should be able to see state changes reflected in Redux Devtools.
