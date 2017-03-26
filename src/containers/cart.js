@@ -30,12 +30,17 @@ class Cart extends Component {
   }
 }
 
+// More information about the implementation pattern below can be found at the link below
+// https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
+
+//Subscribes
 function mapStateToProps(state, prop){
   return {
     cart: state.cart
   }
 }
 
+//Changes in our program will be reflected when new actions are dispatched
 function mapDispatchtoProps(dispatch) {
   return bindActionCreators(CartActions, dispatch)
 }
