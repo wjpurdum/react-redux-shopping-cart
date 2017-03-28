@@ -287,7 +287,10 @@ export default(initialState) => {
 }
 ```
 
-<!-- Adding root level component to index.js -->
+## Adding Cart Container to App component
+<!-- Adding App component to index.js -->
+
+## Adding App component to Application Root (index.js)
 
 <!-- Wrap app in provider -->
 
