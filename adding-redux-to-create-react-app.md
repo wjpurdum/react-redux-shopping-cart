@@ -8,7 +8,7 @@ By now, you should have `create-react-app` installed on your computer via `npm`.
 If you have not, click here.
 </summary>
 
-Run the following:
+Run the following command:
 
 ```bash
  $ npm i -g create-react-app
@@ -28,17 +28,17 @@ After we've installed these dependencies, let's create directories for `actions`
 
 ## Adding a Store
 
-Next we'll create a file that defines our store, titled `store.js`
+Next we'll create a file that defines our store, titled `Store.js`
 
 ```bash
- $ touch src/store.js
+ $ touch src/Store.js
 ```
 
-in `src/store.js`:
+in `src/Store.js`:
 
 ```js
-import { createStore } from 'redux'
-import rootReducer from './reducers'
+import {createStore} from 'redux'
+import rootReducer from './reducers/RootReducer'
 
 export default (initialState)=>{
   return createStore(rootReducer, initialState)
@@ -54,22 +54,23 @@ Stores use **reducers** to determine **which** change or ***action*** to apply t
 ## Adding in Reducers
 
 ```bash
- $ touch src/reducers/index.js src/reducers/cart.js
+ $ touch src/reducers/RootReducer.js src/reducers/CartReducers.js
 ```
 
 ### Using combineReducers
 
-> in `src/reducers/index.js`
+> in `src/reducers/RootReducer.js`
 
 ```js
 import cart from './cart'
 import { combineReducers } from 'redux'
 
-//stateless components should be defined as functions.
-
+// the object returned by this function must have a key named 'cart' since cart
+// will be a prop on our Cart container element
 const rootReducer = combineReducers({
   cart //ES6 short hand for {cart: cart}
-})
+
+export default rootReducer
 ```
 
 > in `src/reducers/cart.js`
@@ -77,7 +78,7 @@ const rootReducer = combineReducers({
 ```js
 export default(state = [], action) => {
   switch(action.type){
-    case 'ADD_ITEM'
+    case 'ADD_ITEM':
       return [...state, action.item]
     default:
       return state
@@ -88,19 +89,25 @@ export default(state = [], action) => {
 ## Adding an action
 
 ```bash
- $ mkdir src/action
- $ touch src/action/ADD_TO_CART.js
+ $ mkdir src/actions
+ $ touch src/actions/CartActions.js
 ```
 
-> in `src/actions/ADD_TO_CART.js`
+> in `src/actions/CartActions.js`
 
 ```js
-//Action Creator function
-//This action will be called from a button in the UI
+// Action Creator function
+// This action will be called from a button in the UI
 export const addToCart = (item) => {
+
+  // This console.log is a side effect and technically makes this function 'impure'.
+  // It may come in handy when testing to see if we've integrated redux successfully,
+  // to determine if our actions are firing
+
   console.log(`ACTION: adding ${item} to cart`)
   return {
-    type: 'add',
+    //actions must have a type property
+    type: 'ADD_ITEM', //action naming conventions: all caps with snake-case (JAVASCRIPT_CONSTANT naming convention )
     item //ES6 shorthand again {item: item}
   }
 }
@@ -162,18 +169,18 @@ Before we add in a container, let's talk about how Redux interacts with containe
 
 ```bash
  $ mkdir src/containers
- $ touch src/containers/shelf.js
+ $ touch src/containers/cart.js
 ```
 
-> in `src/containers/shelf.js`:
+> in `src/containers/cart.js`:
 
 ```js
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import * as CartActions from '../actions/cart'
-import Shelf from '../containers/shelf'
+import * as CartActions from '../actions/CartActions'
+import Shelf from '../components/shelf'
 
 class Cart extends Component {
   constructor(props){
@@ -199,28 +206,39 @@ class Cart extends Component {
     )
   }
 }
-
 // More information about the implementation pattern below can be found at the link below
 // https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
 
 //Subscribes the container component to any changes in Redux-managed state
-function mapStateToProps(state, prop){
+function mapStateToProps(state, props) {
   return {
     cart: state.cart
-  }
+  };
 }
 
 //Changes in our program will be reflected when new actions are dispatched
-function mapDispatchtoProps(dispatch) {
-  return bindActionCreators(CartActions, dispatch)
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(CartActions, dispatch)
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchtoProps)(Cart)
+// typically the lines below would be condensed into :
+// export default connect(mapStateToProps, mapDispatchToProps)(Cart)
+
+// returns a wrapper that we need to pass the component into
+const connection = connect(mapStateToProps, mapDispatchToProps)
+
+// wraps the component with the store connection configured above
+const wrappedComponent = connection(Cart)
+
+export default wrappedComponent
+
 ```
 
 ## Adding in Integration with Chrome Redux Devtools Extension
 
-> in `src/store.js`:
+> in `src/Store.js`:
 
 ```js
 export default(initialState) => {

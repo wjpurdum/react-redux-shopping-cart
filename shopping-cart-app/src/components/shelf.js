@@ -13,16 +13,22 @@ class Shelf extends Component {
       ]
     }
   }
+
   render() {
-    const shelfItems = this.state.shelfItems.map(item, id) => {
+    const shelfItems = this.state.shelfItems.map( (item, id) => {
       return (
         <li key={id}>
-          <button>Add Item</button>
+        <button onClick={() => this.props.addItem(item)}>+</button>
+          {item}
         </li>
       )
-    }
+    })
     return (
       <div>
+        <h2>Store Shelf:</h2>
+        <ul>
+            {shelfItems}
+        </ul>
       </div>
     )
   }
