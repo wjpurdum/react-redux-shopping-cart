@@ -265,6 +265,7 @@ Next, we'll head over to `App.js` to add in our new container component.
   </summary>
   If we had some kind of information in `props` that was pertinent to the state.
   In the example below, our `props` corresponds to `ownProps`.
+  <br>
   <img src="./lesson-images/mapState.png">
   <br>
   <a href="https://github.com/reactjs/react-redux/blob/master/docs/api.md#the-arity-of-mapstatetoprops-and-mapdispatchtoprops-determines-whether-they-receive-ownprops">
