@@ -227,14 +227,15 @@ class Cart extends Component {
 // More information about the implementation pattern below can be found at the link below
 // https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
 
-//Subscribes the container component to any changes in Redux-managed state
+// Subscribes the container component to any changes in Redux-managed state
+// the state being mapped to props is the redux state
 function mapStateToProps(state, props) {
   return {
     cart: state.cart
   };
 }
 
-//Changes in our program will be reflected when new actions are dispatched
+// Changes in our program will be reflected when new actions are dispatched
 function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(CartActions, dispatch)
@@ -253,6 +254,23 @@ const wrappedComponent = connection(Cart)
 export default wrappedComponent
 
 ```
+
+In `mapStateToProps`, we're passing in `props` but not using it.
+The `Cart` container component will only be receiving props from redux.
+Next, we'll head over to `App.js` to add in our new container component.
+
+<details>
+  <summary>
+    When do you need access to props?
+  </summary>
+  If we had some kind of information in `props` that was pertinent to the state.
+  In the example below, our `props` corresponds to `ownProps`.
+  <img src="./lesson-images/mapState.png">
+  <br>
+  <a href="https://github.com/reactjs/react-redux/blob/master/docs/api.md#the-arity-of-mapstatetoprops-and-mapdispatchtoprops-determines-whether-they-receive-ownprops">
+  mapStateToProps in Redux API Docs
+  </a>
+</details>
 
 ## Adding in Integration with Chrome Redux Devtools Extension
 

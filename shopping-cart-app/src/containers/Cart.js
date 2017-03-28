@@ -39,6 +39,7 @@ class Cart extends Component {
 
 //Subscribes the container component to any changes in Redux-managed state
 function mapStateToProps(state, props) {
+  console.log(props);
   return {
     cart: state.cart
   };
