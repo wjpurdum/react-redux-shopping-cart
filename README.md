@@ -145,6 +145,7 @@ export const addToCart = (item) => {
 
 Now we've added in the definitive pieces of a working Redux app. Next, we will add in presentational and container components.
 
+## Adding a Presentational Component
 
 ```bash
  $ touch src/components/Shelf.js
@@ -191,7 +192,7 @@ class Shelf extends Component {
 export default Shelf
 ```
 
-## Adding a Container
+## Adding a Container Component
 
 Before we add in a container, let's talk about how Redux interacts with container components and components differently.
 
