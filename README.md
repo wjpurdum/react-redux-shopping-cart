@@ -7,7 +7,9 @@ The complexity of the shopping cart app itself is minimal so as to help us get a
 ## Setup
 
 Clone down this repo.
-
+```bash
+ $ git clone git@github.com:ga-wdi-exercises/react-redux-shopping-cart.git
+```
 By now, you should have `create-react-app` installed on your computer via `npm`.
 <details>
 <summary>
@@ -28,15 +30,18 @@ Run the following command:
 
 ## Project Structuring
 
-After we've installed these dependencies, let's create directories for `actions`, `components`, and `reducers` in the `src` directory.
+After we've installed these dependencies, let's create directories for `actions`, `components`, `container`, `reducers`, and finally `stylesheets` in the `src` directory.
 
 ```bash
- $ mkdir src/actions src/components src/reducers src/containers
+ $ mkdir src/actions src/components src/reducers src/containers src/stylesheets
  $ mv src/App.js src/components/App.js
- $ mv src/App.css src/components/App.css
+ $ mv src/App.css src/stylesheets/App.css
+ $ mv src/index.css src/stylesheets/index.css
 ```
 
-Finally, let's update the import paths for `App` in `index.js` to reflect the new locations of `App.js` and `App.css`.
+Next, let's update the import paths for `App` in `index.js` to reflect the new locations of `App.js` and `App.css`.
+
+Finally, we'll update the path for `index.css` in `index.js`.
 
 ## Adding a Store
 
