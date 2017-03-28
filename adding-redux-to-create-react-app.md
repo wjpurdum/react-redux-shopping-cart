@@ -336,4 +336,4 @@ export default(initialState) => {
 ```
 Now you should be able to see state changes reflected in Redux Devtools!
 
-![Redux Screenshot](./lesson-images/redex-dev-tools.png)
+![Redux Screenshot](./lesson-images/redux-dev-tools.png)
