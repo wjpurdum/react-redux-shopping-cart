@@ -32,7 +32,11 @@ After we've installed these dependencies, let's create directories for `actions`
 
 ```bash
  $ mkdir src/actions src/components src/reducers src/containers
+ $ mv src/App.js src/components/App.js
+ $ mv src/App.css src/components/App.css
 ```
+
+Finally, let's update the import paths for `App` in `index.js` to reflect the new locations of `App.js` and `App.css`.
 
 ## Adding a Store
 
