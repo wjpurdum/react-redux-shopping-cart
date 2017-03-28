@@ -32,7 +32,7 @@ The first step we'll take in integrating Redux with React will be to define a st
 `createStore` will take 2 arguments: the program's combined reducers (`rootReducer`), and an initial state. Recall that a store processes changes in application state with reducers.
 The store takes in a state, then applies the appropriate **action** via the **reducer**.
 
-Next we'll create a file that defines our store, titled `Store.js`
+Next we'll create a file that defines our store, titled `Store.js`:
 
 ```bash
  $ touch src/Store.js
@@ -69,7 +69,7 @@ We will refer to the returned object as `rootReducer` below.
 The values of `rootReducer` will be the reducer functions into a single reducing function you can
 pass to createStore.
 
-> in `src/reducers/RootReducer.js`
+> in `src/reducers/RootReducer.js`:
 
 ```js
 import cart from './CartReducers'
@@ -84,7 +84,7 @@ const rootReducer = combineReducers({
 export default rootReducer
 ```
 
-> in `src/reducers/CartReducers.js`
+> in `src/reducers/CartReducers.js`:
 
 ```js
 export default(state = [], action) => {
@@ -107,7 +107,7 @@ because they read more cleanly.
  $ touch src/actions/CartActions.js
 ```
 
-> in `src/actions/CartActions.js`
+> in `src/actions/CartActions.js`:
 
 ```js
 // Action Creator function
@@ -132,10 +132,10 @@ Now we've added in the definitive pieces of a working Redux app. Next, we will a
 
 ```bash
  $ mkdir src/components
- $ touch src/components/shelf.js
+ $ touch src/components/Shelf.js
 ```
 
-> in `src/components.js`
+> in `src/components/Shelf.js`:
 
 ```js
 import React, { Component } from 'react'
@@ -163,6 +163,10 @@ class Shelf extends Component {
     }
     return (
       <div>
+        <h2>Store Inventory</h2>
+        <ul>
+            {shelfItems}
+        </ul>
       </div>
     )
   }
