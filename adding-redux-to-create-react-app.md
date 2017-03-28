@@ -23,10 +23,14 @@ Run the following command:
 After we've installed these dependencies, let's create directories for `actions`, `components`, and `reducers` in the `src` directory.
 
 ```bash
- $ mkdir src/actions src/components src/reducers
+ $ mkdir src/actions src/components src/reducers src/containers
 ```
 
 ## Adding a Store
+
+The first step we'll take in integrating Redux with React will be to define a store using `createStore` from `redux`.
+`createStore` will take 2 arguments: the program's combined reducers (`rootReducer`), and an initial state. Recall that a store processes changes in application state with reducers.
+The store takes in a state, then applies the appropriate **action** via the **reducer**.
 
 Next we'll create a file that defines our store, titled `Store.js`
 
@@ -45,9 +49,9 @@ export default (initialState)=>{
 }
 ```
 
-Ultimately, a store applies an action to a state, or more specifically, to a copy of the state.
-Stores use **reducers** to determine **which** change or ***action*** to apply to the current application state held in the store.
-***Actions*** define ***what*** the change actually is.
+Ultimately, a store uses the reducer to apply an action to a state, or more specifically, to a copy of the state.
+
+Stores use **reducers** to determine **which** change or ***action*** to apply to the current application state held in the store. The ***actions*** define ***what*** the change actually is, the ***reducer*** just determines which change to make, or which ***action***.
 
 
 
@@ -60,15 +64,15 @@ Stores use **reducers** to determine **which** change or ***action*** to apply t
 ### Using combineReducers
 
 The combineReducers helper function returns a single, aggregated object.
-As its name suggests, it combines all the reducers into a single object, then returns that object.
-We will refer to this as the `rootReducer` below.
-The values of this object will be the reducer functions into a single reducing function you can
+As its name suggests, combineReducers combines all the reducers into a single object, then returns that object.
+We will refer to the returned object as `rootReducer` below.
+The values of `rootReducer` will be the reducer functions into a single reducing function you can
 pass to createStore.
 
 > in `src/reducers/RootReducer.js`
 
 ```js
-import cart from './cart'
+import cart from './CartReducers'
 import { combineReducers } from 'redux'
 
 // the object returned by this function must have a key named `cart` since `cart`
@@ -80,7 +84,7 @@ const rootReducer = combineReducers({
 export default rootReducer
 ```
 
-> in `src/reducers/cart.js`
+> in `src/reducers/CartReducers.js`
 
 ```js
 export default(state = [], action) => {
@@ -179,10 +183,10 @@ Before we add in a container, let's talk about how Redux interacts with containe
 
 ```bash
  $ mkdir src/containers
- $ touch src/containers/cart.js
+ $ touch src/containers/Cart.js
 ```
 
-> in `src/containers/cart.js`:
+> in `src/containers/Cart.js`:
 
 ```js
 import React, { Component } from 'react'
@@ -259,5 +263,10 @@ export default(initialState) => {
     )
 }
 ```
+
+<!-- Adding root level component to index.js -->
+
+<!-- Wrap app in provider -->
+
 
 Now you should be able to see state changes reflected in Redux Devtools.
