@@ -1,15 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './components/App'
-
-import './stylesheets/index.css'
-
+import { Provider } from 'react-redux'
 // The Provider is a special type of component.
 // The Provider will wrap our App component along with a store that encapsulates
-// local states within App
+// local states within the App component.
 
-import { Provider } from 'react-redux'
+import App from './components/App'
 import Store from './Store'
+
+import './stylesheets/index.css'
 
 const StoreInstance = Store()
 

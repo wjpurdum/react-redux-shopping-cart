@@ -7,9 +7,7 @@ import * as CartActions from '../actions/CartActions'
 import Shelf from '../components/Shelf'
 
 class Cart extends Component {
-
   constructor(props){
-    // receives props from
     super(props)
     this.state = {}
   }
@@ -39,7 +37,6 @@ class Cart extends Component {
 
 //Subscribes the container component to any changes in Redux-managed state
 function mapStateToProps(state, props) {
-  console.log(props);
   return {
     cart: state.cart
   };

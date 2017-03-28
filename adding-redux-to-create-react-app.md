@@ -20,6 +20,8 @@ Run the following command:
  $ npm i -S redux react-redux
 ```
 
+## Project Structuring
+
 After we've installed these dependencies, let's create directories for `actions`, `components`, and `reducers` in the `src` directory.
 
 ```bash
@@ -103,7 +105,6 @@ because they read more cleanly.
 ## Adding an action
 
 ```bash
- $ mkdir src/actions
  $ touch src/actions/CartActions.js
 ```
 
@@ -131,7 +132,6 @@ Now we've added in the definitive pieces of a working Redux app. Next, we will a
 
 
 ```bash
- $ mkdir src/components
  $ touch src/components/Shelf.js
 ```
 
@@ -143,7 +143,6 @@ import React, { Component } from 'react'
 class Shelf extends Component {
   constructor(props){
     super(props)
-
     this.state = {
       shelfItems: [
         "Bananas",
@@ -153,14 +152,16 @@ class Shelf extends Component {
       ]
     }
   }
+
   render() {
-    const shelfItems = this.state.shelfItems.map(item, id) => {
+    const shelfItems = this.state.shelfItems.map( (item, id) => {
       return (
         <li key={id}>
-          <button>Add Item</button>
+          {item}
+          <button onClick={() => this.props.addItem(item)}>+</button>
         </li>
       )
-    }
+    })
     return (
       <div>
         <h2>Store Inventory</h2>
@@ -186,7 +187,6 @@ Before we add in a container, let's talk about how Redux interacts with containe
 ![Comparing container components and presentational components in Redux](./lesson-images/redux-presentational-container-diffs.png)
 
 ```bash
- $ mkdir src/containers
  $ touch src/containers/Cart.js
 ```
 
@@ -198,11 +198,12 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import * as CartActions from '../actions/CartActions'
-import Shelf from '../components/shelf'
+import Shelf from '../components/Shelf'
 
 class Cart extends Component {
   constructor(props){
     super(props)
+    this.state = {}
   }
 
   render() {
@@ -248,7 +249,7 @@ function mapDispatchToProps(dispatch) {
 // returns a wrapper that we need to pass the component into
 const connection = connect(mapStateToProps, mapDispatchToProps)
 
-// wraps the component with the store connection configured above
+// wraps the Cart component with the store connection configured above
 const wrappedComponent = connection(Cart)
 
 export default wrappedComponent
@@ -273,26 +274,66 @@ Next, we'll head over to `App.js` to add in our new container component.
   </a>
 </details>
 
+
+## Adding Cart Container to App component
+
+> in `components/App.js`:
+
+```js
+import React, { Component } from 'react'
+import Cart from '../containers/Cart'
+
+import '../stylesheets/App.css'
+
+class App extends Component {
+  render() {
+    return (
+      <Cart />
+    );
+  }
+}
+
+export default App
+```
+
+## Adding App component to Application Root (index.js)
+
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+// The Provider is a special type of component.
+// The Provider will wrap our App component along with a store that encapsulates
+// local states within the App component.
+
+import App from './App'
+import Store from './Store'
+
+
+const StoreInstance = Store()
+
+ReactDOM.render(
+  <Provider store={StoreInstance}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)
+```
+
 ## Adding in Integration with Chrome Redux Devtools Extension
 
 > in `src/Store.js`:
 
 ```js
 export default(initialState) => {
-    return createStore(
-      rootReducer,
-      initialState,
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    )
+  return createStore(
+    rootReducer,
+    initialState,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
 }
 ```
+Now you should be able to see state changes reflected in Redux Devtools!
 
-## Adding Cart Container to App component
-<!-- Adding App component to index.js -->
-
-## Adding App component to Application Root (index.js)
-
-<!-- Wrap app in provider -->
-
-
-Now you should be able to see state changes reflected in Redux Devtools.
+![Redux Screenshot](./redex-dev-tools)
