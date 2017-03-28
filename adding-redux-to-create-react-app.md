@@ -59,14 +59,20 @@ Stores use **reducers** to determine **which** change or ***action*** to apply t
 
 ### Using combineReducers
 
+The combineReducers helper function returns a single, aggregated object.
+As its name suggests, it combines all the reducers into a single object, then returns that object.
+We will refer to this as the `rootReducer` below.
+The values of this object will be the reducer functions into a single reducing function you can
+pass to createStore.
+
 > in `src/reducers/RootReducer.js`
 
 ```js
 import cart from './cart'
 import { combineReducers } from 'redux'
 
-// the object returned by this function must have a key named 'cart' since cart
-// will be a prop on our Cart container element
+// the object returned by this function must have a key named `cart` since `cart`
+// will be a *prop* on our Cart container element
 const rootReducer = combineReducers({
   cart //ES6 short hand for {cart: cart}
 
@@ -85,6 +91,9 @@ export default(state = [], action) => {
   }
 }
 ```
+
+[Switch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement conditionals are used in place of `if`/`else if` conditionals
+because they read more cleanly.
 
 ## Adding an action
 
