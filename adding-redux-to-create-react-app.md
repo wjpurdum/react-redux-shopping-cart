@@ -75,6 +75,7 @@ import { combineReducers } from 'redux'
 // will be a *prop* on our Cart container element
 const rootReducer = combineReducers({
   cart //ES6 short hand for {cart: cart}
+})
 
 export default rootReducer
 ```
