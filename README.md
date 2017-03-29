@@ -6,10 +6,8 @@ The complexity of the shopping cart app itself is minimal so as to help us get a
 
 ## Setup
 
-Clone down this repo.
-```bash
- $ git clone git@github.com:ga-wdi-exercises/react-redux-shopping-cart.git
-```
+Fork and clone down this repo.
+
 By now, you should have `create-react-app` installed on your computer via `npm`.
 <details>
 <summary>
