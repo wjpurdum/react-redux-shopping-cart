@@ -323,7 +323,7 @@ import { Provider } from 'react-redux'
 // The Provider will wrap our App component along with a store that encapsulates
 // local states within the App component.
 
-import App from './App'
+import App from './components/App'
 import Store from './Store'
 
 
