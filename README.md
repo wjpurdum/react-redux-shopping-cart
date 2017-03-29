@@ -194,7 +194,7 @@ export default Shelf
 
 ## Adding a Container Component
 
-Before we add in a container, let's talk about how Redux interacts with container components and components differently.
+Before we add in a container, let's talk about how Redux interacts with container components and presentational components differently.
 
 > From [Redux Docs: Presentational and Container Components](http://redux.js.org/docs/basics/UsageWithReact.html#presentational-and-container-components)
 
