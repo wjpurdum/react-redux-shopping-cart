@@ -260,11 +260,11 @@ function mapDispatchToProps(dispatch) {
 // typically the lines below would be condensed into :
 // export default connect(mapStateToProps, mapDispatchToProps)(Cart)
 
-// returns a wrapper that we need to pass the component into
-const connection = connect(mapStateToProps, mapDispatchToProps)
+// returns a function wrapper that we need to pass the component into
+const wrapperFunction = connect(mapStateToProps, mapDispatchToProps)
 
 // wraps the Cart component with the store connection configured above
-const wrappedComponent = connection(Cart)
+const wrappedComponent = wrapperFunction(Cart)
 
 export default wrappedComponent
 
