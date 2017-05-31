@@ -13,3 +13,12 @@ export const addToCart = (item) => {
     item //ES6 shorthand again {item: item}
   }
 }
+
+
+export const removeFromCart = (item) => {
+  console.log(`ACTION: Removing ${item} from cart`)
+  return {
+    type: 'REMOVE_ITEM',
+    item
+  }
+}
