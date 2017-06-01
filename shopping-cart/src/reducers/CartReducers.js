@@ -6,3 +6,5 @@ export default(state = [], action) => {
       return state
   }
 }
+
+// This determines - how do we apply an action to the state? if the store receifes an action called "Add Item" - what should it do?
